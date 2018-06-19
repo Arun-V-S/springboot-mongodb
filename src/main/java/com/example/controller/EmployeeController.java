@@ -1,5 +1,7 @@
 package com.example.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import org.springframework.http.MediaType;
@@ -32,6 +34,12 @@ public class EmployeeController {
 		return employeerepository.findOne(id);
 	}
 	
+	//readAll
+	@RequestMapping(value="/")
+	public List <Employee> readAll() {
+		return employeerepository.findAll();
+	}
+	
 	//update
 	@RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public void update(@RequestBody Employee employee) {
@@ -42,5 +50,11 @@ public class EmployeeController {
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public void delete(@PathVariable String id) {
 		employeerepository.delete(id);
+	}
+	
+	//deleteAll
+	@RequestMapping(value = "/", method = RequestMethod.DELETE)
+	public void deleteall() {
+		employeerepository.deleteAll();
 	}
 }
